@@ -1,7 +1,5 @@
-from flask import Flask, render_template
-from flask import request
-from todo_app.data.session_items import get_items
-from todo_app.data.session_items import add_item
+from flask import Flask, render_template, request
+from todo_app.data.session_items import get_items, add_item
 
 from todo_app.flask_config import Config 
 
@@ -23,5 +21,5 @@ def addItem():
         add_item(new_item)
         
        
-        return render_template('index.html', items = items)
+        return index()
        
