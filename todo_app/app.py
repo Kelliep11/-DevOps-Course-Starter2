@@ -17,8 +17,6 @@ def index():
         return render_template('index.html', items = items)
 
 
-
-
 @app.route('/todo', methods=['GET', 'POST']) 
 def addItem(): 
                 
@@ -27,4 +25,8 @@ def addItem():
         
        
         return index()
-       
+
+
+#app.route('/complete_item', methods=['PUT'])       
+#change status
+    
