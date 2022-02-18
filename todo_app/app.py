@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
-from todo_app.data.session_items import get_items, add_item
-from todo_app.data.trello_items import get_trello_items
+from todo_app.data.trello_items import get_trello_items, add_card
 
 from todo_app.flask_config import Config 
 import requests
@@ -22,10 +21,9 @@ def index():
 
 @app.route('/todo', methods=['GET', 'POST']) 
 def addItem(): 
-        items = get_items()
-        
-        new_item = request.form.get('Todo')
-        add_item(new_item)
+                
+        new_item_name = request.form.get('Todo')
+        add_card(new_item_name)
         
        
         return index()
