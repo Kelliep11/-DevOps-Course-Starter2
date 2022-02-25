@@ -29,7 +29,7 @@ def get_trello_items():
     items = response_json[0]['cards']
     return items
     
-def add_card(name):
+def add_card(id_List, name):
     
     url = "https://api.trello.com/1/cards"
 
@@ -37,11 +37,28 @@ def add_card(name):
         "key":os.getenv("TRELLO_API_KEY"),
         "token":os.getenv("TRELLO_API_TOKEN"),
         "name":name,
+        "idList": id_List,
         "idList":"620e338c101c43271f9ac494"
     }
 
     headers = {"content-type": "application/json"}
 
     response = requests.request("POST", url, headers=headers, params=querystring)
+
+    print(response.text)
+
+def move_card_to_done(card_id):
+    
+    url = "https://api.trello.com/1/cards" + card_id
+
+    querystring = {
+        "key":os.getenv("TRELLO_API_KEY"),
+        "token":os.getenv("TRELLO_API_TOKEN"),
+        "idList":"620e33934c5aed55e2dd3fd5",
+        "id": card_id}
+
+    headers = {"content-type": "application/json"}
+
+    response = requests.request("PUT", url, headers=headers, params=querystring)
 
     print(response.text)

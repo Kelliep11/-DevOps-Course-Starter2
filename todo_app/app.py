@@ -27,6 +27,9 @@ def addItem():
         return index()
 
 
-#app.route('/complete_item', methods=['PUT'])       
-#change status
+@app.route('/complete_item/<card_id>', methods=['PUT'])       
+def move_card_to_done(card_id):
+         
+         return index()
+        
     
