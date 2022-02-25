@@ -12,7 +12,15 @@
       <h2>Items</h2>
       <ul class="list-group mb-4">
         {% for item in items %} 
-          <li>{{ item.name }} - {{item.status}}</li> 
+          <li>{{ item.name }} - {{item.status}} 
+             {% if item.status != 'Done' %}
+             <form action= "/complete_Card" method="POST">
+              <input type="hidden" name="card_id" value="{{item.id}}" > 
+              <button type="submit" class="btn btn-primary">complete item</button>
+            </form>
+            {% endif %}
+            </li> 
+            
         {% endfor %} 
           </ul>
     </div>

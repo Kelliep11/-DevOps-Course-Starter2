@@ -49,13 +49,12 @@ def add_card(id_List, name):
 
 def move_card_to_done(card_id):
     
-    url = "https://api.trello.com/1/cards" + card_id
+    url = "https://api.trello.com/1/cards/{card_id}" 
 
     querystring = {
         "key":os.getenv("TRELLO_API_KEY"),
         "token":os.getenv("TRELLO_API_TOKEN"),
-        "idList":"620e33934c5aed55e2dd3fd5",
-        "id": card_id}
+        "idList":"620e33934c5aed55e2dd3fd5"}
 
     headers = {"content-type": "application/json"}
 

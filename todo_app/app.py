@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from todo_app.data.trello_items import get_trello_items, add_card
+from todo_app.data.trello_items import get_trello_items, add_card, move_card_to_done
 
 from todo_app.flask_config import Config 
 import requests
@@ -27,9 +27,11 @@ def addItem():
         return index()
 
 
-@app.route('/complete_item/<card_id>', methods=['PUT'])       
-def move_card_to_done(card_id):
-         
-         return index()
+@app.route('/complete_Card', methods=['POST'])       
+def complete_Card():
+        card_id = request.form['card_id']
+        move_card_to_done(card_id)
+                
+        return index()
         
     
