@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import os
 import requests
 import json
+from .TrelloClass import Item
 
 
 
@@ -25,8 +26,9 @@ def get_trello_items():
     for trello_list in response_json:
         for card in trello_list["cards"]:
             card["status"] = trello_list["name"]
+            my_item = Item.from_trello_card(card, trello_list)
+            items.append(my_item)
 
-    items = response_json[0]['cards']
     return items
     
 def add_card(id_List, name):
@@ -49,7 +51,7 @@ def add_card(id_List, name):
 
 def move_card_to_done(card_id):
     
-    url = "https://api.trello.com/1/cards/{card_id}" 
+    url = f"https://api.trello.com/1/cards/{card_id}" 
 
     querystring = {
         "key":os.getenv("TRELLO_API_KEY"),
@@ -61,3 +63,4 @@ def move_card_to_done(card_id):
     response = requests.request("PUT", url, headers=headers, params=querystring)
 
     print(response.text)
+    print(url)
