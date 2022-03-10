@@ -31,7 +31,7 @@ def get_trello_items():
 
     return items
     
-def add_card(id_List, name):
+def add_card(name):
     
     url = "https://api.trello.com/1/cards"
 
@@ -39,7 +39,6 @@ def add_card(id_List, name):
         "key":os.getenv("TRELLO_API_KEY"),
         "token":os.getenv("TRELLO_API_TOKEN"),
         "name":name,
-        "idList": id_List,
         "idList":"620e338c101c43271f9ac494"
     }
 
