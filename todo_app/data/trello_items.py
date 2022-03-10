@@ -7,7 +7,7 @@ from .TrelloClass import Item
 
 
 def get_trello_items():
-    url = "https://api.trello.com/1/boards/620e338747c98f4449c740c7/lists"
+    url = f"https://api.trello.com/1/boards/{os.getenv('TRELLO_BOARD_ID')}/lists"
 
  
     querystring = {
