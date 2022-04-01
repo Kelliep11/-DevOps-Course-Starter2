@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from todo_app.data.trello_items import get_trello_items, add_card, move_card_to_done
+from todo_app.data.view_model import ViewModel
 
 from todo_app.flask_config import Config 
 import requests
@@ -14,7 +15,8 @@ app.config.from_object(Config())
 def index():
         items = get_trello_items()
 
-        return render_template('index.html', items = items)
+        item_view_model = ViewModel(items)
+        return render_template('index.html', view_model=item_view_model)  
 
 
 @app.route('/todo', methods=['GET', 'POST']) 
@@ -34,4 +36,3 @@ def complete_Card():
                 
         return index()
         
-    
