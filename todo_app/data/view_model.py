@@ -8,9 +8,23 @@ class ViewModel:
     
     @property
     def todo_items(self):
-        # TODO: Actually write the code!
-        return []
+        filtered_items=[]
+        for item in self._items:
+
+            if item.status == "To Do":
+
+                filtered_items.append(item)
+
+        return filtered_items
+        
 
     @property
     def done_items(self):
-        return self._items
+        filtered_items=[]
+        for item in self._items:
+
+            if item.status == "Done":
+
+                filtered_items.append(item)
+
+        return filtered_items
