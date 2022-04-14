@@ -1,6 +1,9 @@
 import pytest
 from dotenv import load_dotenv, find_dotenv
 from todo_app import app
+import os
+import requests
+import json
 
 @pytest.fixture
 def client():
@@ -13,3 +16,35 @@ def client():
 
     with test_app.test_client() as client:
         yield client
+
+class StubResponse():
+    def __init__(self, fake_response_data):
+        self.fake_response_data = fake_response_data
+
+    def json(self):
+        return self.fake_response_data
+
+# Stub replacement for requests.request(url)
+def stub(method, url, headers, params):
+    test_board_id = os.environ.get('TRELLO_BOARD_ID')
+    fake_response_data = None
+    if url == f'https://api.trello.com/1/boards/{test_board_id}/lists' and method == "GET":
+        fake_response_data = [{
+            'id': '123abc',
+            'name': 'To Do',
+            'cards': [{'id': '456', 'name': 'Test card'}]
+        }]
+        return StubResponse(fake_response_data)
+
+    raise Exception(f'Integration test stub no mock for url "{url}"')
+
+
+def test_index_page(monkeypatch, client):
+    # Replace requests.request(url) with our own function
+    monkeypatch.setattr(requests, 'request', stub)
+
+    # Make a request to our app's index page
+    response = client.get('/')
+
+    assert response.status_code == 200
+    assert 'Test card' in response.data.decode()
