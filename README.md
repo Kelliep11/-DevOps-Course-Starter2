@@ -54,3 +54,6 @@ You should see output similar to the following:
  * Debugger PIN: 226-556-590
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
+## Running the tests
+If you are running the tests from within VS code you can use the testing tab on the left hand side to run all or some of the tests. If you want to run the tests via the terminal you can either use poetry run pytest to run all the tests or poetry run pytest a_folder_name to be more specific

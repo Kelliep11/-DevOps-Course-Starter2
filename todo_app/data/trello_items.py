@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import os
 import requests
 import json
-from .TrelloClass import Item
+from todo_app.data.item import Item
 
 
 

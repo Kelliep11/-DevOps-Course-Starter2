@@ -9,9 +9,9 @@
 
   <div class="row">
     <div class="col-md-12">
-      <h2>Items</h2>
+      <h2>Todo Items</h2>
       <ul class="list-group mb-4">
-        {% for item in items %} 
+        {% for item in view_model.todo_items %} 
           <li>{{ item.name }} - {{item.status}} 
              {% if item.status != 'Done' %}
              <form action= "/complete_Card" method="POST">
@@ -22,7 +22,23 @@
             </li> 
             
         {% endfor %} 
-          </ul>
+      </ul>
+    </div>
+    <div class="col-md-12">
+      <h2>Done Items</h2>
+      <ul class="list-group mb-4">
+        {% for item in view_model.done_items %} 
+          <li>{{ item.name }} - {{item.status}} 
+             {% if item.status != 'Done' %}
+             <form action= "/complete_Card" method="POST">
+              <input type="hidden" name="card_id" value="{{item.id}}" > 
+              <button type="submit" class="btn btn-primary">complete item</button>
+            </form>
+            {% endif %}
+            </li> 
+            
+        {% endfor %} 
+      </ul>
     </div>
   </div>
 
