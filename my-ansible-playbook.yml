@@ -5,7 +5,14 @@
   tasks:
   - name: install git
     ansible.builtin.yum:
-      yum:
+      
       name: git
-      state: present
-    
+      state: latest
+      become: yes
+ 
+  - name: install python
+    ansible.builtin.yum:
+      
+      name: python3
+      state: latest
+      become: yes   
