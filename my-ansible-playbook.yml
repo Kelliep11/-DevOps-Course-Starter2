@@ -1,6 +1,15 @@
 - name: set up to do app
   hosts: webservers
   remote_user: ec2-user
+  vars_prompt:
+    - name: trello_key
+      prompt: 'what is your trello key'
+      private: no
+      default: ''
+    - name: trello_token
+      prompt: 'what is your trello token'
+      private: no
+      default: ''
 
   tasks:
   - name: install git
@@ -8,14 +17,14 @@
       
       name: git
       state: latest
-      become: yes
+    become: yes
  
   - name: install python
     ansible.builtin.yum:
       
       name: python3
       state: latest
-      become: yes 
+    become: yes 
 
   - name: install poetry
     ansible.builtin.shell: curl -sSL https://install.python-poetry.org | python3 -
@@ -27,3 +36,21 @@
       path: /opt/todoapp
       state: directory
       owner: ec2-user
+    become: yes  
+
+  - name: Git checkout
+    ansible.builtin.git:
+      repo: 'https://github.com/Kelliep11/-DevOps-Course-Starter2.git'
+      dest: /opt/todoapp
+      version: main 
+
+  - name: install dependencies
+    ansible.builtin.shell: /home/ec2-user/.local/bin/poetry install
+    args:
+      chdir: /opt/todoapp
+
+  - name: Copy to Host
+    ansible.builtin.template:
+       src: .env.j2
+       dest: /opt/todoapp/.env
+
