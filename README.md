@@ -57,3 +57,9 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 
 ## Running the tests
 If you are running the tests from within VS code you can use the testing tab on the left hand side to run all or some of the tests. If you want to run the tests via the terminal you can either use poetry run pytest to run all the tests or poetry run pytest a_folder_name to be more specific
+
+## To provision a VM from an Ansible Control Node
+ansible-playbook my-ansible-playbook.yml -i my-ansible-inventory
+``
+
+For Mod 4 this is in /home/ec2-user/to-do_app_setup on Ansible controller IP: 13.41.20.10 
