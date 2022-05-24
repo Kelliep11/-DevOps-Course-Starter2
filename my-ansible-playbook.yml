@@ -58,7 +58,7 @@
     ansible.builtin.copy:
       src: todoapp.service
       dest: /etc/systemd/system/todoapp.service
-      mode: '777'
+      owner: 'ec2-user'
     become: yes
 
   - name: run todoapp.service
