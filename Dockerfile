@@ -6,4 +6,5 @@ WORKDIR /app
 COPY pyproject.toml poetry.lock /app/
 RUN poetry install
 COPY todo_app /app/todo_app/
-ENTRYPOINT [ "poetry", "run", "flask", "run", "--host", "0.0.0.0"]
+ENTRYPOINT [ "poetry", "run", "gunicorn", "-b", "0.0.0.0:5000", "todo_app.app:create_app()"]
+EXPOSE 5000
