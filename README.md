@@ -63,3 +63,16 @@ ansible-playbook my-ansible-playbook.yml -i my-ansible-inventory
 ``
 
 For Mod 4 this is in /home/ec2-user/to-do_app_setup on Ansible controller IP: 13.41.20.10 
+
+## To build and run the Docker files
+to build in prod use command 
+ $ docker build --target production . --tag todoapp
+
+ to run in prod use command
+ $ docker run --env-file .env -p 5000:5000 todoapp
+
+ To build in dev use command
+ $ docker build --target development . --tag todoapp:dev
+ 
+ to run in dev using bind mount so you can make changes and see it update use command
+ $ docker run --env-file .env -p 5000:5000 --mount type=bind,source="$(pwd)"/todo_app,target=/app/todo_app todoapp:dev 
