@@ -74,8 +74,8 @@ to build in prod use command
  To build in dev use command
  $ docker build --target development . --tag todoapp:dev
  
- to run in dev using bind mount so you can make changes and see it update use command
+ To run in dev using bind mount so you can make changes and see it update use command
  $ docker run --env-file .env -p 5000:5000 --mount type=bind,source="$(pwd)"/todo_app,target=/app/todo_app todoapp:dev 
 
- to run docker tests
+ To run docker tests
  $ docker run --env-file .env.test my-test-image
