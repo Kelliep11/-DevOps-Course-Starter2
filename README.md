@@ -94,3 +94,5 @@ to build in prod use command
  docker tag kelliep/my-todo-app:latest registry.heroku.com/to-do-app-kellie/web
  push to heroku
  docker push registry.heroku.com/to-do-app-kellie/web
+ then release to Heroku
+ heroku container:release -a to-do-app-kellie web
