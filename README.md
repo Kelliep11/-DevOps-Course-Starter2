@@ -79,3 +79,18 @@ to build in prod use command
 
  To run docker tests
  $ docker run --env-file .env.test my-test-image
+
+ module 8 help
+ building a pipeline to run the docker file and then deploy it to docker. and then deploy it to Heroku
+ docker build --target production --tag kelliep/my-todo-app .
+ docker push kelliep/my-todo-app:latest
+
+ These have been added to pipeline so when you do a push, this should run automatically. you can check in docker to see your project, and also in the github repo to see jobs running
+
+ install heroku curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+ heroku login -i work email, password in secrets file
+
+ change the tag from docker to heroku
+ docker tag kelliep/my-todo-app:latest registry.heroku.com/to-do-app-kellie/web
+ push to heroku
+ docker push registry.heroku.com/to-do-app-kellie/web
