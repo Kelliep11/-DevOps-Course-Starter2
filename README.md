@@ -83,7 +83,7 @@ to build in prod use command
  module 8 help
  building a pipeline to run the docker file and then deploy it to docker. and then deploy it to Heroku
  docker build --target production --tag kelliep/my-todo-app .
- docker push kelliep/my-todo-app:latest
+
 
  These have been added to pipeline so when you do a push, this should run automatically. you can check in docker to see your project, and also in the github repo to see jobs running
 
