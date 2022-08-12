@@ -89,6 +89,7 @@ to build in prod use command
 
  install heroku curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
  heroku login -i work email, password in secrets file
+ heroku container:login
 
  change the tag from docker to heroku
  docker tag kelliep/my-todo-app:latest registry.heroku.com/to-do-app-kellie/web
