@@ -3,9 +3,7 @@ on:
   push:
     paths-ignore:
       - 'README.md'
-  pull_request:
-    paths-ignore:
-      - 'README.md'
+
 jobs:
  heroku:
     if: github.event_name == 'push' && github.ref == 'refs/heads/exercise8'
