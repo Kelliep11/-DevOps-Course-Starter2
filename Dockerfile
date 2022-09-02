@@ -9,6 +9,7 @@ COPY todo_app /app/todo_app/
 
 
 FROM base as production
+ENV PORT=5000
 CMD poetry run gunicorn "todo_app.app:create_app()" --bind 0.0.0.0:$PORT
 EXPOSE 5000
 
