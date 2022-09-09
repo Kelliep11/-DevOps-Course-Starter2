@@ -1,7 +1,7 @@
 FROM python:3.8 as base
 
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-ENV PATH="${PATH}:/root/.poetry/bin"
+RUN curl -sSL https://install.python-poetry.org/ | python -
+ENV PATH="${PATH}:/root/.local/bin"
 WORKDIR /app
 COPY pyproject.toml poetry.lock /app/
 RUN  poetry config virtualenvs.create false --local && poetry install
