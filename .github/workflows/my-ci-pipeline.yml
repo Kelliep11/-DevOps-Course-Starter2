@@ -35,7 +35,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
   - name: docker build
-    run: docker build --target production --tag .
+    run: docker build --target production --tag kelliep/my-todo-app .
   - name: docker push
     run: docker push kelliep/my-todo-app:latest
   - name: deploy to azure
