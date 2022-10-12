@@ -1,7 +1,24 @@
 import pymongo
+import os
+from todo_app.data.item import Item
 
 def get_items():
-    pass
+    client = pymongo.MongoClient(os.getenv("MONGO_CONNECTION_STRING"))
+    database = client[os.getenv("MONGO_DATABASE_NAME")]
+    collection = database["items"]
+    
+    mongo_items = collection.find()
 
-def add_items():
-    pass
+    return [Item.from_mongo_item(mongo_item) for mongo_item in mongo_items]
+
+def add_items(title: str):
+    new_mongo_item = {
+        'task': title,
+        'status': "To Do"
+    }
+
+    client = pymongo.MongoClient(os.getenv("MONGO_CONNECTION_STRING"))
+    database = client[os.getenv("MONGO_DATABASE_NAME")]
+    collection = database["items"]
+
+    collection.insert_one(new_mongo_item)
