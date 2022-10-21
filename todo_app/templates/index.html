@@ -14,7 +14,7 @@
         {% for item in view_model.todo_items %} 
           <li>{{ item.name }} - {{item.status}} 
              {% if item.status != 'Done' %}
-             <form action= "/complete_Card" method="POST">
+             <form action= "/complete_card" method="POST">
               <input type="hidden" name="card_id" value="{{item.id}}" > 
               <button type="submit" class="btn btn-primary">complete item</button>
             </form>
@@ -30,7 +30,7 @@
         {% for item in view_model.done_items %} 
           <li>{{ item.name }} - {{item.status}} 
              {% if item.status != 'Done' %}
-             <form action= "/complete_Card" method="POST">
+             <form action= "/complete_card" method="POST">
               <input type="hidden" name="card_id" value="{{item.id}}" > 
               <button type="submit" class="btn btn-primary">complete item</button>
             </form>
