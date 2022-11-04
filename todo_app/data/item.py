@@ -4,9 +4,7 @@ class Item:
         self.name = name 
         self.status = status 
 
-    @classmethod 
-    def from_trello_card(cls, card, list): 
-        return cls(card['id'], card['name'], list['name'])
+    
 
     @classmethod
     def from_mongo_item(cls, mongo_item):

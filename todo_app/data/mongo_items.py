@@ -1,6 +1,7 @@
 import pymongo
 import os
 from todo_app.data.item import Item
+from bson import ObjectId
 
 def get_items():
     client = pymongo.MongoClient(os.getenv("MONGO_CONNECTION_STRING"))
@@ -28,7 +29,7 @@ def complete_item(mongo_id):
     database = client[os.getenv("MONGO_DATABASE_NAME")]
     collection = database["items"]
 
-    myquery = { "_id": mongo_id }
+    myquery = { "_id": ObjectId(mongo_id) }
     newvalues = { "$set": { "status": "Done" } }
 
     collection.update_one(myquery, newvalues)
