@@ -6,7 +6,7 @@ from todo_app.flask_config import Config
 import requests
 import os
 import todo_app.data.mongo_items as mongo_items
-from flask_login import LoginManager, login_required
+from flask_login import LoginManager, login_required, UserMixin, login_user
 
 def create_app():
     app = Flask(__name__)
@@ -52,10 +52,17 @@ def create_app():
         user_info_url = 'https://api.github.com/user'
 
         auth_headers = {
-            "Authorisation": f"Bearer (access_token)"
+            "Authorisation": f"Bearer {access_token}"
         }
-
+        print (auth_headers)
         user_info_response = requests.get(user_info_url, headers = auth_headers)
+        print (user_info_response.json())
+        id = user_info_response.json()['login']
+        user = User(id)
+
+        login_user(user)
+
+        return index()
 
     class User(UserMixin): 
         def __init__(self, id): 
