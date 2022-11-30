@@ -35,12 +35,12 @@ def create_app():
 
     @app.route('/login/callback')
     def callback():
-        authorisation_code = request.args['code']
+        authorization_code = request.args['code']
         access_token_url = f"https://github.com/login/oauth/access_token"
         query_params = {
             "client_id": os.getenv('CLIENT_ID'),
             "client_secret": os.getenv('CLIENT_SECRET'),
-            "code": authorisation_code
+            "code": authorization_code
         }
         headers = {
             "Accept": "application/json"
@@ -52,7 +52,7 @@ def create_app():
         user_info_url = 'https://api.github.com/user'
 
         auth_headers = {
-            "Authorisation": f"Bearer {access_token}"
+            "Authorization": f"Bearer {access_token}"
         }
         print (auth_headers)
         user_info_response = requests.get(user_info_url, headers = auth_headers)
