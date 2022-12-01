@@ -75,6 +75,8 @@ def create_app():
     def addItem(): 
         new_item_name = request.form.get('Todo')
         mongo_items.add_items(new_item_name)
+        if current_user.role == "reader":
+            return "Forbidden", 403
         return index()
             
     @app.route('/complete_card', methods=['POST'])  
