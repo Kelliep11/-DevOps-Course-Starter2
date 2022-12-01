@@ -35,12 +35,12 @@ def create_app():
 
     @app.route('/login/callback')
     def callback():
-        authorization_code = request.args['code']
+        authorisation_code = request.args['code']
         access_token_url = f"https://github.com/login/oauth/access_token"
         query_params = {
             "client_id": os.getenv('CLIENT_ID'),
             "client_secret": os.getenv('CLIENT_SECRET'),
-            "code": authorization_code
+            "code": authorisation_code
         }
         headers = {
             "Accept": "application/json"
@@ -54,9 +54,9 @@ def create_app():
         auth_headers = {
             "Authorization": f"Bearer {access_token}"
         }
-        print (auth_headers)
+        
         user_info_response = requests.get(user_info_url, headers = auth_headers)
-        print (user_info_response.json())
+       
         id = user_info_response.json()['login']
         user = User(id)
 
@@ -83,6 +83,9 @@ def create_app():
         card_id = request.form['card_id']
         mongo_items.complete_item(card_id)  
         return index()
+        
+        if current_user.role == "reader":
+            return "Forbidden", 403
 
     return app
 
