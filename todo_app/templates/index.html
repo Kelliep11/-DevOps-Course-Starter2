@@ -13,7 +13,7 @@
       <ul class="list-group mb-4">
         {% for item in view_model.todo_items %} 
           <li>{{ item.name }} - {{item.status}} 
-             {% if item.status != 'Done' %}
+             {% if item.status != 'Done' and user.role == 'writer' %}
              <form action= "/complete_card" method="POST">
               <input type="hidden" name="card_id" value="{{item.id}}" > 
               <button type="submit" class="btn btn-primary">complete item</button>
@@ -41,11 +41,12 @@
       </ul>
     </div>
   </div>
-
+  {% if user.role == 'writer' %}
   <form action="todo" method="post" class="form-example">
     <div class="form-example">
       <label for="Todo">Add To Do Item </label>
       <input type="text" name="Todo" id="Todo" value="" required>
       <button type="submit" class="btn btn-primary">Submit</button>
   </form>
+  {% endif %}
 {% endblock %}

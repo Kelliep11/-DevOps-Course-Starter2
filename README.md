@@ -92,3 +92,5 @@ Website address https://kp01012022.azurewebsites.net/
  
  Module 11-
  everytime you reload gitpod you need to go to github > settings > developer settings and into your oauth and update the url and callback url with the new numbers on gitpod
+
+ Before merging, a new OAUTH app in github and set env variables in azure
